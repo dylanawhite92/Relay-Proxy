@@ -44,9 +44,6 @@ input:focus {
     outline: none;
 }
 
-input::placeholder {
-}
-
 button {
     padding: 12px;
     width: 250px;
