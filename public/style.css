@@ -10,6 +10,9 @@ body {
     font-family: "Poppins", sans-serif;
     line-height: 1.6;
     background-color: steelblue;
+}
+
+body, input, input::placeholder, button {
     color: #fff;
 }
 
@@ -24,10 +27,6 @@ h2 {
     max-width: 500px;
     margin: 100px auto;
     text-align: center;
-}
-
-input, input::placeholder, button {
-    color: #fff;
 }
 
 input {
