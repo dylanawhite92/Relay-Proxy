@@ -9,7 +9,7 @@
 body {
     font-family: "Poppins", sans-serif;
     line-height: 1.6;
-    background-color: slategray;
+    background-color: steelblue;
     color: #fff;
 }
 
@@ -24,4 +24,40 @@ h2 {
     max-width: 500px;
     margin: 100px auto;
     text-align: center;
+}
+
+input, input::placeholder, button {
+    color: #fff;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #fff;
+    background-color: transparent;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+input:focus {
+    outline: none;
+}
+
+input::placeholder {
+}
+
+button {
+    padding: 12px;
+    width: 250px;
+    border: none;
+    border-radius: 10px;
+    background-color: slategrey;
+    margin-top: 30px;
+}
+
+button:hover {
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
 }
