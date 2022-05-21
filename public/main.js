@@ -5,7 +5,8 @@ const cityInput = document.querySelector("#city-input");
 
 // Fetch weather from API
 const fetchWeather = async (city) => {
-    const url = `/api?q=${city}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=096f66487a2de80a0eb869508f0fb71b
+    `;
 
     const res = await fetch(url);
     const data = await res.json();
@@ -53,3 +54,6 @@ weatherForm.addEventListener("submit", e => {
         fetchWeather(cityInput.value);
     }
 });
+
+// Initial API call
+fetchWeather("chicago");
