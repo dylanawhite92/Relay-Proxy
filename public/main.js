@@ -19,4 +19,26 @@ const fetchWeather = async (city) => {
         alert("Invalid API Key.");
         return;
     }
+
+    const displayData = {
+        city: data.name,
+        temp: kelvinToFahrenheit(data.main.temp)
+    }
+
+    addWeatherToDOM(displayData);
+}
+
+// Add display data to DOM
+const addWeatherToDOM = data => {
+    weatherDisplay.innerHTML = `
+        <h1> Weather in ${data.city}</h1>
+        <h2>${data.temp} &deg;F</h2>
+    `
+    
+    cityInput.value = "";
+}
+
+// API's default value is Kelvin, so we convert to Farenheit
+const kelvinToFahrenheit = temp => {
+    return Math.ceil(((temp - 273.15) * 9) / 5 + 32);
 }
