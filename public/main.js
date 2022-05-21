@@ -42,3 +42,14 @@ const addWeatherToDOM = data => {
 const kelvinToFahrenheit = temp => {
     return Math.ceil(((temp - 273.15) * 9) / 5 + 32);
 }
+
+// Form submission event listener
+weatherForm.addEventListener("submit", e => {
+    e.preventDefault();
+
+    if (cityInput.value === "") {
+        alert("Please enter a city.");
+    } else {
+        fetchWeather(cityInput.value);
+    }
+});
