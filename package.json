@@ -1,7 +1,7 @@
 {
   "name": "relay-proxy",
   "version": "1.0.0",
-  "description": "",
+  "description": "A project using the Open Weather API to relearn API Key hiding, rate limiting, caching.",
   "main": "main.js",
   "scripts": {
     "start": "node index",
