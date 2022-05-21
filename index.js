@@ -8,10 +8,8 @@ const PORT = process.env.PORT || 5000;
 // Initialize express
 const app = express();
 
-// Routes
-app.get("/api", (req, res) => {
-    res.json({ success: true });
-})
+// Use routes
+app.use("/api", require("./routes"));
 
 // Enable CORS
 app.use(cors());
