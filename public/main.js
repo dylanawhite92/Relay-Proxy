@@ -27,6 +27,7 @@ const fetchWeather = async (city) => {
     }
 
     addWeatherToDOM(displayData);
+    console.log(data);
 }
 
 // Add display data to DOM
