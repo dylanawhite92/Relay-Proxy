@@ -20,10 +20,34 @@ const fetchWeather = async (city) => {
         return;
     }
 
+    // metric/imperial subsets currently placeholders until toggle implemented
+    // conversions for temps, times, vis, wind, needed
     const displayData = {
         city: data.name,
         farenheit: kelvinToFahrenheit(data.main.temp),
         celsius: kelvinToCelsius(data.main.temp),
+        metric: {
+            // celsius: kelvinToCelsius(data.main.temp),
+            high_celsius: "",
+            low_celsius: "",
+            feels_like: "",
+            wind_speed: "", // m/s
+            visibility: "", // km
+        },
+        imperial: {
+            // farenheit: kelvinToFahrenheit(data.main.temp),
+            high_farenheit: "",
+            low_farenheit: "",
+            feels_like: "",
+            wind_speed: "", // mph
+            visibility: "", // miles
+        },
+        precipitation: "", // 1hour, API field is undefined if no rain
+        description: "",
+        sunrise: "",
+        sunset: "",
+        humidity: "",
+        dewpoint: "",
         country: data.sys.country
     }
 
