@@ -26,11 +26,18 @@ const fetchWeather = async (city) => {
         city: data.name,
         farenheit: kelvinToFahrenheit(data.main.temp),
         celsius: kelvinToCelsius(data.main.temp),
+        high_farenheit: "",
+        low_farenheit: "",
+        high_celsius: "",
+        low_celsius: "",
+        wind_speed: "", // mph
+        visibility: "", // miles
         metric: {
             // celsius: kelvinToCelsius(data.main.temp),
             high_celsius: "",
             low_celsius: "",
             feels_like: "",
+            precipitation: "", // mm
             wind_speed: "", // m/s
             visibility: "", // km
         },
@@ -39,6 +46,7 @@ const fetchWeather = async (city) => {
             high_farenheit: "",
             low_farenheit: "",
             feels_like: "",
+            precipitation: "", // inches
             wind_speed: "", // mph
             visibility: "", // miles
         },
@@ -63,6 +71,11 @@ const addWeatherToDOM = data => {
     `
     
     cityInput.value = "";
+}
+
+// Format unix timestamp for sunset/sunrise
+const formatTime = time => {
+    // code here
 }
 
 // API's default value is Kelvin, so we convert to Farenheit/Celsius
