@@ -22,30 +22,24 @@ const fetchWeather = async (city) => {
 
     // metric/imperial subsets currently placeholders until toggle implemented
     // conversions for temps, times, vis, wind, needed
+    // replace several function calls later
     const displayData = {
         city: data.name,
-        farenheit: kelvinToFahrenheit(data.main.temp),
-        celsius: kelvinToCelsius(data.main.temp),
-        high_farenheit: "",
-        low_farenheit: "",
-        high_celsius: "",
-        low_celsius: "",
-        wind_speed: "", // mph
-        visibility: "", // miles
+        units: ["metric", "imperial"],
         metric: {
-            // celsius: kelvinToCelsius(data.main.temp),
-            high_celsius: "",
-            low_celsius: "",
-            feels_like: "",
+            celsius: kelvinToCelsius(data.main.temp),
+            high_celsius: kelvinToCelsius(data.main.temp_max),
+            low_celsius: kelvinToCelsius(data.main.temp_min),
+            feels_like: kelvinToCelsius(data.main.feels_like),
             precipitation: "", // mm
             wind_speed: "", // m/s
             visibility: "", // km
         },
         imperial: {
-            // farenheit: kelvinToFahrenheit(data.main.temp),
-            high_farenheit: "",
-            low_farenheit: "",
-            feels_like: "",
+            farenheit: kelvinToFahrenheit(data.main.temp),
+            high_farenheit: kelvinToFahrenheit(data.main.temp_max),
+            low_farenheit: kelvinToFahrenheit(data.main.temp_min),
+            feels_like: kelvinToFahrenheit(data.main.feels_like),
             precipitation: "", // inches
             wind_speed: "", // mph
             visibility: "", // miles
@@ -61,24 +55,27 @@ const fetchWeather = async (city) => {
 
     addWeatherToDOM(displayData);
     console.log(data);
+    console.log(displayData);
 }
 
 // Add display data to DOM
 const addWeatherToDOM = data => {
     weatherDisplay.innerHTML = `
         <h1> Weather in ${data.city}, ${data.country}</h1>
-        <h2>${data.farenheit} &deg;F | ${data.celsius} &deg;C</h2>
+        <h2>${data.imperial.farenheit} &deg;F | ${data.metric.celsius} &deg;C</h2>
     `
     
     cityInput.value = "";
 }
 
 // Format unix timestamp for sunset/sunrise
-const formatTime = time => {
-    // code here
-}
+// const formatTime = time => {
+
+// }
 
 // API's default value is Kelvin, so we convert to Farenheit/Celsius
+// come back and try to refactor these so we aren't making several function calls
+// just make one and pass all data back to displayData obj
 const kelvinToFahrenheit = temp => {
     return Math.ceil(((temp - 273.15) * 9) / 5 + 32);
 }
