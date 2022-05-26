@@ -37,12 +37,12 @@ const fetchWeather = async (city) => {
             low_farenheit: kelvinToFahrenheit(data.main.temp_min),
             feels_like: kelvinToFahrenheit(data.main.feels_like),
         },
-        precipitation: data.precipitation, // 1hour, API field is undefined if no rain
+        precipitation: checkForPrecipitation(data.precipitation), // 1hour, API field is undefined if no rain
         description: data.weather[0].description,
         sunrise: data.sys.sunrise,
         sunset: data.sys.sunset,
         humidity: data.main.humidity,
-        wind_speed: data.wind.speed, // mph
+        wind_speed: convertWindSpeed(data.wind.speed), // mph
         visibility: data.visibility,
         country: data.sys.country
     }
@@ -78,6 +78,20 @@ const kelvinToFahrenheit = temp => {
 
 const kelvinToCelsius = temp => {
     return Math.ceil(temp - 273.15);
+}
+
+// If there is rain, the field is given in mm
+const checkForPrecipitation = precip => {
+    if (!precip) {
+        return "No precipitation";
+    } else {
+        return (precip / 25.4);
+    }
+}
+
+// Convert m/s to mph
+const convertWindSpeed = wind => {
+    return Math.floor(wind * 2.237);
 }
 
 // Form submission event listener
