@@ -21,35 +21,29 @@ const fetchWeather = async (city) => {
     }
 
     // metric/imperial subsets currently placeholders until toggle implemented
-    // conversions for temps, times, vis, wind, needed
+    // conversions for temps, times, wind, needed
     // replace several function calls later
     const displayData = {
         city: data.name,
-        units: ["metric", "imperial"],
         metric: {
             celsius: kelvinToCelsius(data.main.temp),
             high_celsius: kelvinToCelsius(data.main.temp_max),
             low_celsius: kelvinToCelsius(data.main.temp_min),
             feels_like: kelvinToCelsius(data.main.feels_like),
-            precipitation: "", // mm
-            wind_speed: "", // m/s
-            visibility: "", // km
         },
         imperial: {
             farenheit: kelvinToFahrenheit(data.main.temp),
             high_farenheit: kelvinToFahrenheit(data.main.temp_max),
             low_farenheit: kelvinToFahrenheit(data.main.temp_min),
             feels_like: kelvinToFahrenheit(data.main.feels_like),
-            precipitation: "", // inches
-            wind_speed: "", // mph
-            visibility: "", // miles
         },
-        precipitation: "", // 1hour, API field is undefined if no rain
-        description: "",
-        sunrise: "",
-        sunset: "",
-        humidity: "",
-        dewpoint: "",
+        precipitation: data.precipitation, // 1hour, API field is undefined if no rain
+        description: data.weather[0].description,
+        sunrise: data.sys.sunrise,
+        sunset: data.sys.sunset,
+        humidity: data.main.humidity,
+        wind_speed: data.wind.speed, // mph
+        visibility: data.visibility,
         country: data.sys.country
     }
 
@@ -67,6 +61,8 @@ const addWeatherToDOM = data => {
     
     cityInput.value = "";
 }
+
+// Consolidate multiple temp point functions
 
 // Format unix timestamp for sunset/sunrise
 // const formatTime = time => {
