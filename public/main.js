@@ -32,8 +32,8 @@ const fetchWeather = async (city) => {
         feels_like: kelvinToFahrenheit(data.main.feels_like),
         precipitation: checkForPrecipitation(data.precipitation), // 1hour, API field is undefined if no rain
         description: data.weather[0].description,
-        sunrise: data.sys.sunrise,
-        sunset: data.sys.sunset,
+        sunrise: formatTime(data.sys.sunrise),
+        sunset: formatTime(data.sys.sunset),
         humidity: data.main.humidity,
         wind_speed: convertWindSpeed(data.wind.speed), // mph
         visibility: data.visibility,
@@ -55,12 +55,28 @@ const addWeatherToDOM = data => {
     cityInput.value = "";
 }
 
-// Consolidate multiple temp point functions
-
 // Format unix timestamp for sunset/sunrise
-// const formatTime = time => {
+const formatTime = time => {
+    let timeValue = new Date(time * 1000);
+    let hours = timeValue.getHours();
+    let minutes = timeValue.getMinutes();
+    let afterNoon = false;
 
-// }
+    // Military time conversion
+    if (hours === 0) {
+        hours = 12;
+    } else if (hours > 12) {
+        hours -= 12;
+        afterNoon = true;
+    }
+
+    let formattedTime = `${hours}:${minutes}`;
+
+    // Add AM/PM
+    afterNoon ? (formattedTime += "PM") : (formattedTime += "AM");
+
+    return formattedTime;
+}
 
 // API's default value is Kelvin, so we convert to Farenheit/Celsius
 const kelvinToFahrenheit = temp => {
