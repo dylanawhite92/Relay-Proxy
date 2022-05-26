@@ -20,9 +20,6 @@ const fetchWeather = async (city) => {
         return;
     }
 
-    // metric/imperial subsets currently placeholders until toggle implemented
-    // conversions for temps, times, wind, needed
-    // replace several function calls later
     const displayData = {
         city: data.name,
         celsius: kelvinToCelsius(data.main.temp),
@@ -49,8 +46,10 @@ const fetchWeather = async (city) => {
 const addWeatherToDOM = data => {
     weatherDisplay.innerHTML = `
         <h1> Weather in ${data.city}, ${data.country}</h1>
-        <h2>${data.farenheit} &deg;F | ${data.celsius} &deg;C</h2>
-        <h3>Feels like : ${data.feels_like} &deg;F. ${data.description}.</h3>
+        <h2>${data.farenheit}&deg; F | ${data.celsius}&deg; C</h2>
+        <h3>H: ${data.high_farenheit}&deg; L: ${data.low_farenheit}&deg;</h3>
+        <p>Feels like: ${data.feels_like}&deg; ${data.description}.</p>
+        <p>Humidity: ${data.humidity}% Precipitation: ${data.precipitation}.</p>
     `
     
     cityInput.value = "";
@@ -91,9 +90,10 @@ const kelvinToCelsius = temp => {
 // If there is rain, the field is given in mm
 const checkForPrecipitation = precip => {
     if (!precip) {
-        return "No precipitation";
+        return "None";
     } else {
-        return (precip / 25.4);
+        let result = (precip) / 25.4;
+        return result + " inches";
     }
 }
 
