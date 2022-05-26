@@ -33,13 +33,10 @@ const fetchWeather = async (city) => {
         sunset: formatTime(data.sys.sunset),
         humidity: data.main.humidity,
         wind_speed: convertWindSpeed(data.wind.speed), // mph
-        visibility: data.visibility,
         country: data.sys.country
     }
 
     addWeatherToDOM(displayData);
-    console.log(data);
-    console.log(displayData);
 }
 
 // Add display data to DOM
@@ -47,9 +44,10 @@ const addWeatherToDOM = data => {
     weatherDisplay.innerHTML = `
         <h1> Weather in ${data.city}, ${data.country}</h1>
         <h2>${data.farenheit}&deg; F | ${data.celsius}&deg; C</h2>
-        <h3>H: ${data.high_farenheit}&deg; L: ${data.low_farenheit}&deg;</h3>
-        <p>Feels like: ${data.feels_like}&deg; ${data.description}.</p>
+        <h3>Feels like ${data.feels_like}&deg;. ${data.description}.</h3>
+        <p>H: ${data.high_farenheit}&deg; L: ${data.low_farenheit}&deg; Wind: ${data.wind_speed} mph</p>
         <p>Humidity: ${data.humidity}% Precipitation: ${data.precipitation}.</p>
+        <p>Sunrise: ${data.sunrise} Sunset: ${data.sunset}</p>
     `
     
     cityInput.value = "";
