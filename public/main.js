@@ -31,7 +31,7 @@ const fetchWeather = async (city) => {
         low_farenheit: kelvinToFahrenheit(data.main.temp_min),
         feels_like: kelvinToFahrenheit(data.main.feels_like),
         precipitation: checkForPrecipitation(data.precipitation), // 1hour, API field is undefined if no rain
-        description: data.weather[0].description,
+        description: capitalizeFirst(data.weather[0].description),
         sunrise: formatTime(data.sys.sunrise),
         sunset: formatTime(data.sys.sunset),
         humidity: data.main.humidity,
@@ -50,6 +50,7 @@ const addWeatherToDOM = data => {
     weatherDisplay.innerHTML = `
         <h1> Weather in ${data.city}, ${data.country}</h1>
         <h2>${data.farenheit} &deg;F | ${data.celsius} &deg;C</h2>
+        <h3>Feels like : ${data.feels_like} &deg;F. ${data.description}.</h3>
     `
     
     cityInput.value = "";
@@ -99,6 +100,13 @@ const checkForPrecipitation = precip => {
 // Convert m/s to mph
 const convertWindSpeed = wind => {
     return Math.floor(wind * 2.237);
+}
+
+// Capitalize first letter of description field
+// Not done by API for some reason
+const capitalizeFirst = str => {
+    let stringToCap = str.charAt(0).toUpperCase() + str.slice(1);
+    return stringToCap;
 }
 
 // Form submission event listener
